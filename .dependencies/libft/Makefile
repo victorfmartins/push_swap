@@ -6,7 +6,7 @@
 #    By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/30 20:47:17 by vfranco-          #+#    #+#              #
-#    Updated: 2022/06/13 13:59:35 by vfranco-         ###   ########.fr        #
+#    Updated: 2022/06/25 12:25:42 by vfranco-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,8 @@ FILES		=	ft_isalpha.c \
 				ft_strmapi.c \
 				ft_striteri.c \
 				ft_min.c \
-				ft_abs.c
-
-FILES_BONUS =	ft_lstnew.c \
+				ft_abs.c \
+				ft_lstnew.c \
 				ft_lstadd_front.c \
 				ft_lstsize.c \
 				ft_lstlast.c \
@@ -61,7 +60,6 @@ FILES_BONUS =	ft_lstnew.c \
 
 FLAGS		=	-Wall -Wextra -Werror
 OBJ			=	$(FILES:.c=.o)
-OBJ_BONUS	=	$(FILES_BONUS:.c=.o)
 
 ###################################################################
 
@@ -73,11 +71,8 @@ $(NAME):	$(OBJ)
 %.o:	%.c
 			clang -c $(FLAGS) $<
 
-bonus:		$(OBJ_BONUS)
-			ar rcs $(NAME) $(OBJ_BONUS)
-
 clean:
-			rm -f $(OBJ) $(OBJ_BONUS)
+			rm -f $(OBJ)
 
 fclean:	clean
 			rm -f $(NAME)
