@@ -6,7 +6,7 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:40:04 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/27 10:10:34 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:47:49 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@
 
 int		main(int argc, char **argv);
 void    ft_lst_swap(t_list **lst);
-void    ft_lst_push(t_list **lst_to, t_list **lst_from); 
+void    ft_lst_push(t_list **lst_from, t_list **lst_to); 
 #endif

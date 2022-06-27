@@ -6,7 +6,7 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:39:47 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/27 10:57:12 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:22:27 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,21 @@ int    build_stack_a(int argc, char **argv, t_list **lst_a)
     while (i < argc)
     {
         
-        str = ft_strdup(argv[i]); // if fails
-        if (!is_numeric(str))
+        str = ft_strdup(argv[i]);
+        if (!str || !is_numeric(str))
         {
             printf("Error: invalid input. Input must be numeric.\n");
             return (PUSH_SWAP_ERROR);
         }
         new = ft_lstnew(str);
-        // if (new is NULL?)
-        ft_lstadd_front(lst_a, new);
-        // printf("i: %d, nbr: %d, content: %d\n", i, *nbr, *(int*)((*lst_a)->content));
+        if (!new)
+        {
+            printf("Error: unable to create new cell.\n");
+            return (PUSH_SWAP_ERROR);
+        }
+        ft_lstadd_back(lst_a, new);
         i++;
     }
-    // write(1, "\n", 1);
     return (0);
 }
 
@@ -127,34 +129,29 @@ void    ft_sort(t_list **lst_a, t_list **lst_b)
         printf("ft_sorted: at least one list does not exist\n");
         return ;
     }
-    print_stacks(*lst_a, *lst_b);
     while ((*lst_a))
     {
-        // write(1, "Sort pass\n", 10);
         if ((*lst_a)->next && ft_strncmp((*lst_a)->content, (*lst_a)->next->content, INT_MAX) > 0)
         {
             printf("sa\n");
             ft_lst_swap(lst_a);
-            print_stacks(*lst_a, *lst_b);
-            // write(1, "Sort point 1\n", 13);
         }
         else if ((*lst_b) == NULL || ft_strncmp((*lst_a)->content, (*lst_b)->content, INT_MAX) > 0)
         {
             printf("pb\n");
-            ft_lst_push(lst_a, lst_b);            
-            print_stacks(*lst_a, *lst_b);
-            // write(1, "Sort point 2\n", 13);
+            ft_lst_push(lst_a, lst_b);
         }
         else
         {
            printf("pa\n");
             ft_lst_push(lst_b, lst_a);
-            print_stacks(*lst_a, *lst_b);
-            // write(1, "Sort point 3\n", 13);
         }
     }
-    // while ((*lst_b))
-    //     ft_lst_push(lst_a, lst_b);
+    while ((*lst_b))
+    {
+        printf("pa\n");
+        ft_lst_push(lst_b, lst_a);
+    }
 }
 
 int main(int argc, char **argv)
@@ -162,21 +159,14 @@ int main(int argc, char **argv)
 	t_list	*lst_a;
 	t_list	*lst_b;
     
-    printf("Program name: %s\n", argv[0] + 2);
     lst_b = NULL;
     lst_a = NULL;
     build_stack_a(argc, argv, &lst_a);
-    // write(1, "Main point 1\n", 13);
+    // print_stacks(lst_a, lst_b);
     ft_sort(&lst_a, &lst_b);
-    // write(1, "Main point 2\n", 13);
     if (is_sorted(lst_a) == 0)
-    {
         printf("Stack is not sorted\n");
-        //return (PUSH_SWAP_ERROR);
-    }
-    // write(1, "Main point 3\n", 13);
-    print_stacks(lst_a, lst_b);
-    // write(1, "Main point 4\n", 13);
+    // print_stacks(lst_a, lst_b);
     // free stack with lstiter function
     return (0);
 }

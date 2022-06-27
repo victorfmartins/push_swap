@@ -6,7 +6,7 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:24:26 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/27 10:37:43 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:01:59 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void    ft_lst_push(t_list **lst_from, t_list **lst_to)
     aux = NULL;
     if (lst_from == NULL || lst_to == NULL || (*lst_from) == NULL)
     {
-        if ((*lst_from) == NULL)
-            printf("last case");
         printf("Error with push\n");
         return ;
     }
