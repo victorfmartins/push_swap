@@ -6,7 +6,7 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:40:04 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/25 13:28:58 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:10:34 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "./.dependencies/libft/libft.h"
 
 # define PUSH_SWAP_ERROR -1
+# define INT_MAX 2147483647
 
 int		main(int argc, char **argv);
 void    ft_lst_swap(t_list **lst);
