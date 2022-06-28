@@ -6,7 +6,7 @@
 #    By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 18:09:55 by vfranco-          #+#    #+#              #
-#    Updated: 2022/06/26 08:55:09 by vfranco-         ###   ########.fr        #
+#    Updated: 2022/06/28 09:43:48 by vfranco-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ $(GNL):
 				make -C $(GNL_PATH)
 				
 clean:
+				make clean -C $(LIBFT_PATH)
+				make clean -C $(GNL_PATH)
 				$(RM) $(OBJS)
 
 fclean:		clean

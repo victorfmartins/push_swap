@@ -6,11 +6,31 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:39:47 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/27 12:22:27 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:19:14 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
+
+int ft_numeric_strcmp(char *s1, char *s2)
+{
+    int	i;
+
+	i = 0;
+    if (s1[0] == '-' && s2[0] != '-')
+         return (-1);
+    else if (s1[0] != '-' && s2[0] == '-')
+         return (1);
+    else if (ft_strlen(s1) != ft_strlen(s2))
+        return (ft_strlen(s1) - ft_strlen(s2));
+    while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+    return (0);
+}
 
 int is_numeric(char *str)
 {
@@ -26,6 +46,22 @@ int is_numeric(char *str)
     return (1);
 }
 
+int is_duplicate(char *str, t_list *lst)
+{
+    t_list *p;
+
+	if (!lst)
+		return (0);
+	p = lst;
+	while (p)
+    {
+        if (ft_numeric_strcmp(str, p->content) == 0)
+            return (1);
+		p = p->next;
+    }
+    return (0);
+}
+
 int    build_stack_a(int argc, char **argv, t_list **lst_a)
 {
     int i;
@@ -37,9 +73,9 @@ int    build_stack_a(int argc, char **argv, t_list **lst_a)
     {
         
         str = ft_strdup(argv[i]);
-        if (!str || !is_numeric(str))
+        if (!str || !is_numeric(str) || is_duplicate(str, *lst_a))
         {
-            printf("Error: invalid input. Input must be numeric.\n");
+            printf("Error: invalid input. Input must be numeric and non repeatable.\n");
             return (PUSH_SWAP_ERROR);
         }
         new = ft_lstnew(str);
@@ -113,7 +149,7 @@ int is_sorted(t_list *lst)
     max = p->content;
 	while (p->next)
     {
-        if (ft_strncmp(max, p->content, INT_MAX) <= 0)
+        if (ft_numeric_strcmp(max, p->content) <= 0)
             max = p->content;
         else
             return (0);
@@ -131,19 +167,19 @@ void    ft_sort(t_list **lst_a, t_list **lst_b)
     }
     while ((*lst_a))
     {
-        if ((*lst_a)->next && ft_strncmp((*lst_a)->content, (*lst_a)->next->content, INT_MAX) > 0)
+        if ((*lst_a)->next && ft_numeric_strcmp((*lst_a)->content, (*lst_a)->next->content) > 0)
         {
             printf("sa\n");
             ft_lst_swap(lst_a);
         }
-        else if ((*lst_b) == NULL || ft_strncmp((*lst_a)->content, (*lst_b)->content, INT_MAX) > 0)
+        else if ((*lst_b) == NULL || ft_numeric_strcmp((*lst_a)->content, (*lst_b)->content) > 0)
         {
             printf("pb\n");
             ft_lst_push(lst_a, lst_b);
         }
         else
         {
-           printf("pa\n");
+            printf("pa\n");
             ft_lst_push(lst_b, lst_a);
         }
     }
@@ -162,11 +198,9 @@ int main(int argc, char **argv)
     lst_b = NULL;
     lst_a = NULL;
     build_stack_a(argc, argv, &lst_a);
-    // print_stacks(lst_a, lst_b);
     ft_sort(&lst_a, &lst_b);
     if (is_sorted(lst_a) == 0)
         printf("Stack is not sorted\n");
-    // print_stacks(lst_a, lst_b);
     // free stack with lstiter function
     return (0);
 }
