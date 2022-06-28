@@ -6,7 +6,7 @@
 #    By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 18:09:55 by vfranco-          #+#    #+#              #
-#    Updated: 2022/06/28 09:43:48 by vfranco-         ###   ########.fr        #
+#    Updated: 2022/06/28 12:54:10 by vfranco-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME 		=	push_swap
 CC			=	clang
 FILES_PATH	=	.
 FILES 		=	push_swap.c \
-				operations.c
+				operations.c \
+				build_stack.c \
+				print_stack.c
 OBJS_PATH	=	objs
 OBJS 		=	$(addprefix $(OBJS_PATH)/,$(notdir $(FILES:.c=.o)))
 FLAGS 		= 	-Wall -Wextra -Werror
