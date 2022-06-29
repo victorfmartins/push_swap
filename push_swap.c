@@ -6,7 +6,7 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:39:47 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/28 12:45:21 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:53:48 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ int	main(int argc, char **argv)
 
 	lst_b = NULL;
 	lst_a = NULL;
-	build_stack_a(argc, argv, &lst_a);
+	build_str_stack(argc, argv, &lst_a);
+	if (is_sorted(lst_a) == 1)
+		return (0);
 	ft_sort(&lst_a, &lst_b);
 	if (is_sorted(lst_a) == 0)
 		printf("Stack is not sorted\n");

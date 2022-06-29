@@ -6,7 +6,7 @@
 /*   By: vfranco- <vfranco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:31:33 by vfranco-          #+#    #+#             */
-/*   Updated: 2022/06/28 12:49:19 by vfranco-         ###   ########.fr       */
+/*   Updated: 2022/06/29 10:25:22 by vfranco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int	ft_strnbrcmp(char *s1, char *s2)
 	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		{	
+			if (s1[0] == '-' && s2[0] == '-')
+				return (((unsigned char)s1[i] - (unsigned char)s2[i]) * -1);
+			else
+				return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
 		i++;
 	}
 	return (0);
@@ -43,6 +48,9 @@ int	is_numeric(char *str)
 			return (0);
 		i++;
 	}
+	if (i > 10 && (ft_strnbrcmp(str, "2147483647") > 0
+			|| ft_strnbrcmp(str, "-2147483648") < 0))
+		return (0);
 	return (1);
 }
 
@@ -62,7 +70,7 @@ int	is_duplicate(char *str, t_list *lst)
 	return (0);
 }
 
-int	build_stack_a(int argc, char **argv, t_list **lst_a)
+int	build_str_stack(int argc, char **argv, t_list **lst_a)
 {
 	int		i;
 	char	*str;
